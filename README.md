@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # MatchCaddy - Oddschecker Scraper
 
 A lean matched betting automation tool that scrapes offers from Oddschecker, parses them using LLMs, finds high-volume "archetype" matches, and generates step-by-step instructions.
@@ -38,13 +37,3 @@ curl http://localhost:8000/scrape-offers
 - `backend/database/` - Supabase integration
 - `backend/utils/` - Utility functions (ranking, etc.)
 - `backend/main.py` - FastAPI application
-
-
-
-
-
-
-
-=======
-# Odds
->>>>>>> 6daf2d8c2536852e1b929dc5d234515c69eec3e0
