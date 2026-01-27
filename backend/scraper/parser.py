@@ -3,8 +3,8 @@ import json
 import time
 from typing import Optional
 import google.generativeai as genai
-from backend.models.offer import OfferParsed
-from backend.config import Config
+from models.offer import OfferParsed
+from config import Config
 
 
 # Initialize Gemini client
@@ -173,4 +173,5 @@ Important parsing rules:
 If any field cannot be determined (except bookmaker), use null. Be precise with numbers."""
     
     return prompt
+
 

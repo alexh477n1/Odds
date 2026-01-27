@@ -269,3 +269,4 @@ STAGE_ACTIONS = {
     OfferStage.COMPLETED: "View Summary",
 }
 
+

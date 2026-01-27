@@ -22,12 +22,20 @@ cp .env.example .env
 
 4. Run the FastAPI server:
 ```bash
-uvicorn backend.main:app --reload
+uvicorn app.main:app --reload
 ```
 
 5. Test the scraper:
 ```bash
 curl http://localhost:8000/scrape-offers
+```
+
+## Tests
+
+From the repo root:
+```bash
+cd backend
+pytest
 ```
 
 ## Project Structure

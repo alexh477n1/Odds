@@ -61,3 +61,4 @@ class Config:
             raise ValueError("SUPABASE_KEY is not set in environment variables")
         return True
 
+

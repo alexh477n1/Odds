@@ -1,7 +1,7 @@
 """Pydantic models for betting instruction generation."""
 from typing import Optional, List
 from pydantic import BaseModel, Field
-from backend.models.calculator import BetType
+from models.calculator import BetType
 
 
 class InstructionStep(BaseModel):
@@ -122,6 +122,9 @@ class FullOfferInstructionResponse(BaseModel):
     
     # Full plain text
     full_plain_text: str
+
+
+
 
 
 

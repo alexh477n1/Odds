@@ -77,16 +77,19 @@ Complete redesign to make the app offer-centric rather than match-centric. Users
 ## Data Models
 
 ### Offers Catalog
+
 - Scraped from Oddschecker + manual curation
 - Rich metadata: terms, requirements, difficulty, expected profit
 - Signup/referral links
 
 ### User Offer Progress
+
 - Tracks where user is in each offer
 - Links to qualifying bet and free bet
 - Calculates actual vs expected profit
 
 ### Bookmaker Preferences
+
 - Whitelist: Only show these bookmakers
 - Blacklist: Hide these bookmakers
 
@@ -95,28 +98,33 @@ Complete redesign to make the app offer-centric rather than match-centric. Users
 ## Key Features
 
 ### 1. Smart Offer Presentation
+
 - Filter by user preferences
 - Sort by expected profit, difficulty
 - Show completion percentage
 - Highlight time-sensitive offers
 
 ### 2. Guided Flow
+
 - Step-by-step instructions
 - Clear "Next Action" button
 - Progress indicator per offer
 - Reminders for pending actions
 
 ### 3. Auto-Fill Bet Logs
+
 - Pre-populate from offer requirements
 - Stake, min odds, bet type
 - User edits as needed
 
 ### 4. Match Recommendations
+
 - Based on current active offers
 - Filter by min odds requirement
 - Show 1-2 best matches on home
 
 ### 5. Terms Parsing
+
 - Scrape offer terms
 - Extract: wagering, min odds, eligible sports
 - Handle complex multi-step offers
@@ -126,12 +134,14 @@ Complete redesign to make the app offer-centric rather than match-centric. Users
 ## Implementation Phases
 
 ### Phase 1: Database & Models
+
 - [ ] Create V3 schema tables
 - [ ] Pydantic models for offers catalog
 - [ ] Pydantic models for user offer progress
 - [ ] Pydantic models for bookmaker preferences
 
 ### Phase 2: Backend APIs
+
 - [ ] GET /offers/catalog - List available offers
 - [ ] POST /offers/catalog - Admin: Add offer
 - [ ] GET /offers/catalog/{id} - Offer details
@@ -147,22 +157,26 @@ Complete redesign to make the app offer-centric rather than match-centric. Users
 - [ ] PUT /user/onboarding - Update onboarding
 
 ### Phase 3: Onboarding Screens
+
 - [ ] Welcome screen with intro
 - [ ] Bookmaker preferences selector
 - [ ] Offer browser with selection
 
 ### Phase 4: Offer Flow UI
+
 - [ ] Offer details screen with terms
 - [ ] Active offer card with stage indicator
 - [ ] Stage-specific action screens
 - [ ] Confirm dialogs for each transition
 
 ### Phase 5: Home Screen Redesign
+
 - [ ] Active offers carousel
 - [ ] Recommended matches for current offers
 - [ ] Progress summary
 
 ### Phase 6: Terms Scraping
+
 - [ ] Oddschecker terms scraper
 - [ ] Terms parser (extract requirements)
 - [ ] Complex offer handler
@@ -187,21 +201,37 @@ Complete redesign to make the app offer-centric rather than match-centric. Users
 ## Offer Stages
 
 | Stage | Description | Next Action |
+
 |-------|-------------|-------------|
+
 | `discovered` | User saw offer | Start Offer |
+
 | `selected` | User chose offer | Sign Up |
+
 | `signing_up` | Sent to bookmaker | Confirm Account |
+
 | `account_created` | Has bookmaker account | Find Match |
+
 | `qualifying_pending` | Ready to bet | Place Qualifying |
+
 | `qualifying_placed` | Bet is live | Wait for Result |
+
 | `qualifying_settled` | Know the outcome | Wait for Free Bet |
+
 | `free_bet_pending` | Waiting for credit | Confirm Received |
+
 | `free_bet_available` | Have free bet | Place Free Bet |
+
 | `free_bet_placed` | Free bet live | Wait for Result |
+
 | `free_bet_settled` | Know outcome | Complete |
+
 | `completed` | Done! | 🎉 |
+
 | `skipped` | User passed | - |
+
 | `expired` | Ran out of time | - |
+
 | `failed` | Error occurred | Review |
 
 ---
@@ -227,4 +257,3 @@ Complete redesign to make the app offer-centric rather than match-centric. Users
   "estimated_time_minutes": 30
 }
 ```
-

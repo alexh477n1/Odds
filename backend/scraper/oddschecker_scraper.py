@@ -9,7 +9,8 @@ from typing import List, Dict, Optional
 import re
 import asyncio
 from urllib.parse import unquote, parse_qs
-from backend.scraper.parser import parse_offer_with_llm
+from scraper.parser import parse_offer_with_llm
+from models.offer import OfferRaw
 
 
 async def scrape_oddschecker_offers() -> List[Dict]:
@@ -126,6 +127,51 @@ async def scrape_oddschecker_offers() -> List[Dict]:
     
     print(f"\nTotal unique offers found: {len(unique_offers)}")
     return unique_offers
+
+
+def _build_raw_text(offer: Dict) -> str:
+    """Build a consistent raw text payload for LLM parsing."""
+    parts = []
+    bookmaker = offer.get("bookmaker")
+    offer_name = offer.get("offer_name")
+    terms = offer.get("terms_summary")
+    signup_url = offer.get("signup_url")
+    required_stake = offer.get("required_stake")
+    offer_value = offer.get("offer_value")
+    min_odds = offer.get("min_odds")
+
+    if bookmaker:
+        parts.append(f"Bookmaker: {bookmaker}")
+    if offer_name:
+        parts.append(f"Offer: {offer_name}")
+    if terms:
+        parts.append(f"Terms: {terms}")
+    if required_stake is not None:
+        parts.append(f"Required stake: £{required_stake}")
+    if offer_value is not None:
+        parts.append(f"Offer value: £{offer_value}")
+    if min_odds is not None:
+        parts.append(f"Minimum odds: {min_odds}")
+    if signup_url:
+        parts.append(f"Signup URL: {signup_url}")
+
+    return "\n".join(parts).strip()
+
+
+def scrape_offers() -> List[OfferRaw]:
+    """
+    Synchronous wrapper for Oddschecker scraping.
+    Returns OfferRaw objects for downstream parsing.
+    """
+    offers = asyncio.run(scrape_oddschecker_offers())
+    raw_offers: List[OfferRaw] = []
+    for offer in offers:
+        raw_text = _build_raw_text(offer)
+        if raw_text:
+            raw_offers.append(
+                OfferRaw(raw_text=raw_text, bookmaker_hint=offer.get("bookmaker"))
+            )
+    return raw_offers
 
 
 def extract_bookmaker_name_from_logo(offer_detail, soup) -> Optional[str]:
@@ -466,3 +512,4 @@ async def test_scraper():
 
 if __name__ == "__main__":
     asyncio.run(test_scraper())
+

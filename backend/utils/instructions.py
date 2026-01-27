@@ -1,20 +1,20 @@
 """Betting instruction generator utilities."""
 from typing import List, Optional
 import google.generativeai as genai
-from backend.models.calculator import BetType
-from backend.models.instruction import (
+from models.calculator import BetType
+from models.instruction import (
     InstructionStep,
     InstructionRequest,
     InstructionResponse,
     FullOfferInstructionRequest,
     FullOfferInstructionResponse,
 )
-from backend.models.offers_catalog import OfferCatalog
-from backend.utils.calculator import (
+from models.offers_catalog import OfferCatalog
+from utils.calculator import (
     calculate_qualifying_bet,
     calculate_free_bet_snr,
 )
-from backend.config import Config
+from config import Config
 
 
 def get_outcome_name(request: InstructionRequest) -> str:
@@ -422,5 +422,6 @@ Format as clear, numbered points. Be specific to this offer's terms and requirem
 7. **Risk Management**
    - Always place back bet first, then lay immediately
    - Have sufficient funds in exchange account for liability"""
+
 
 
